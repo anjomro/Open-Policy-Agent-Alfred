@@ -10,7 +10,7 @@ WORKDIR $TARGET_FOLDER/
 
 RUN groupadd -r appuser && useradd -r -g appuser appuser
 
-RUN mkdir /app/bin
+RUN mkdir -p /app/bin
 RUN apt-get install curl
 RUN curl -L -o bin/opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64_static
 RUN chmod u+x bin/opa
@@ -29,6 +29,8 @@ COPY version.py /app
 RUN chown -R appuser. /app
 
 USER appuser
+
+RUN mkdir -p /app/db
 
 EXPOSE 5000/tcp
 
